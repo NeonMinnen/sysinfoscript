@@ -70,12 +70,11 @@ def get_architecture_info():
 
 def get_system_uptime():
     try:
-        output = subprocess.check_output("cat /proc/uptime", shell=True, universal_newlines=True)
-        uptime_seconds = float(output.split()[0])
-        uptime_days = int(uptime_seconds // 86400)
-        return f"{uptime_days} days"
+        output = subprocess.check_output("uptime -p", shell=True, universal_newlines=True)
+        return output.strip()
     except Exception as e:
         return "N/A"
+
 
 def get_remote_system_info():
     remote_info = {}
